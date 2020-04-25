@@ -1,0 +1,45 @@
+<h2>Authentification</h2>
+<div class="row" *ngIf="!authStatus">
+  <div class="col-sm-8 col-sm-offset-2">
+    <form
+      [ngClass]="{
+        'submit-button': true,
+        'submit-button-shake': passwordWrong === true
+      }"
+      (ngSubmit)="onSubmit(f)"
+      #f="ngForm"
+    >
+      <div class="form-group">
+        <label for="email">Adresse mail</label>
+        <input
+          type="text"
+          id="email"
+          class="form-control"
+          name="email"
+          ngModel
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          name="password"
+          ngModel
+          required
+        />
+      </div>
+      <button class="btn btn-success" type="submit" [disabled]="f.invalid">
+        Se connecter
+      </button>
+      <div *ngIf="passwordWrong" class="wrong-password" style="color: red">
+        Adresse e-mail ou mot de passe incorrect
+      </div>
+    </form>
+  </div>
+</div>
+<button class="btn btn-danger" *ngIf="authStatus" (click)="onSignOut()">
+  Se déconnecter
+</button>

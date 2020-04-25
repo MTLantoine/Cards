@@ -1,0 +1,35 @@
+<li
+  [ngClass]="{
+    'list-group-item': true,
+    'list-group-item-success': appareilStatus === 'allumé',
+    'list-group-item-danger': appareilStatus === 'éteint'
+  }"
+>
+  <button
+    class="btn btn-sm btn-danger"
+    (click)="onDelete()"
+    style="float: right; margin-left: 30px;"
+  >
+    Supprimer
+  </button>
+  <h3 [ngStyle]="{ color: getColor() }">Appareil : {{ appareilName }}</h3>
+  <h4 [ngStyle]="{ color: getColor() }">Statut : {{ getStatus() }}</h4>
+  <a [routerLink]="[id]">Détail</a>
+  <input type="text" class="form-control" [(ngModel)]="appareilName" />
+  <p>Mis à jour : {{ appareilUpdate | date: "dd/MM/yyyy à hh:mm:ss" }}</p>
+  <button
+    class="btn btn-sm btn-success"
+    *ngIf="appareilStatus === 'éteint'"
+    (click)="onSwitch()"
+  >
+    Allumer
+  </button>
+
+  <button
+    class="btn btn-sm btn-danger"
+    *ngIf="appareilStatus === 'allumé'"
+    (click)="onSwitch()"
+  >
+    Eteindre
+  </button>
+</li>

@@ -1,0 +1,28 @@
+<app-bloc-information></app-bloc-information>
+
+<h2>Mes appareils</h2>
+
+<button class="btn btn-warning" (click)="onGenerate()">
+  Générer données fictives
+</button>
+<button class="btn btn-danger" (click)="onDeleteAll()" style="float: right;">
+  Tout supprimer
+</button>
+<div *ngIf="appareils.length === 0" class="list-group-item">
+  Waiting for data ...
+</div>
+<ul class="list-group">
+  <app-appareil
+    *ngFor="let appareil of appareils.slice().reverse(); let i = index"
+    [appareilName]="appareil.name"
+    [appareilStatus]="appareil.status"
+    [appareilUpdate]="appareil.update"
+    [index]="appareils.length - 1 - i"
+    [id]="appareil.id"
+  ></app-appareil>
+</ul>
+<button class="btn btn-success" (click)="onAllumer()">Tout allumer</button>
+<button class="btn btn-danger" (click)="onEteindre()">Tout éteindre</button>
+<button class="btn btn-primary" (click)="onFetch()">
+  Récuperer données en ligne
+</button>
